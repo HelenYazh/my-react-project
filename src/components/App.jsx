@@ -1,5 +1,7 @@
 import Product from './Product';
 import BookList from './BookList';
+import { Alert } from './Alert';
+import { TfiAgenda } from "react-icons/tfi";
 
 const favouriteBooks = [
   { id: "id-1", name: "JS for beginners" },
@@ -28,8 +30,15 @@ export default function App() {
         price={12.49}
       />
       <>
+        <TfiAgenda size="48"></TfiAgenda>
         <h2>Books of the week</h2>
         <BookList books={favouriteBooks} />
+      </>
+      <>
+        <Alert variant="info" outlined={false} elevated={true}> Would you like to browse our recommended products?</Alert>
+        <Alert variant="warning" outlined={true} elevated={false}>Please update your email!</Alert>
+        <Alert variant="error" outlined={false} elevated={true}>There was an error during transaction!</Alert>
+        <Alert variant="success" outlined={true} elevated={false}>Payment received, thank you for your purchase!</Alert>
       </>
     </div>
   );

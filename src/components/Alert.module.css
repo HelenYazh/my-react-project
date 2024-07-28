@@ -1,0 +1,39 @@
+.alert {
+  margin: 8px;
+  padding: 12px 16px;
+  border-radius: 4px;
+  color: white;
+  background-color: pink;
+  display: flex;
+  justify-content: center;
+  width: 30%;
+}
+
+.info {
+  composes: alert;
+    background-color: rgb(10, 37, 124);
+}
+
+.warning {
+  composes: alert;
+    background-color: chocolate;
+}
+
+.error {
+  composes: alert;
+    background-color: crimson;
+}
+
+.success {
+  composes: alert;
+    background-color: rgb(0, 255, 64);
+}
+
+.alert.isOutlined {
+  outline: 2px solid black;
+}
+
+.alert.isElevated {
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 6px -2px, rgb(0 0 0 / 14%) 0px 6px 7px 0px,
+    rgb(0 0 0 / 12%) 0px 4px 11px 0px;
+}
