@@ -9,6 +9,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import LangSwitcher from "../LangSwitcher/LangSwitcher";
 import CoffeeSize from "../CoffeeSize/CoffeeSize";
 import TermsAccepter from "../TermsAccepter/TermsAccepter";
+import FeedbackForm from "../FeedbackForm/FeedbackForm";
 
 const favouriteBooks = [
   { id: "id-1", name: "JS for beginners" },
@@ -197,6 +198,8 @@ export default function App() {
           Payment received, thank you for your purchase!
         </Alert>
       </>
+
+      <FeedbackForm />
     </div>
   );
 }
