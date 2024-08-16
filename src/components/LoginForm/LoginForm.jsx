@@ -1,5 +1,5 @@
 import { useId } from "react";
-import css from "../CoffeeSize/CoffeeSize.module.css";
+import css from "./LoginForm.module.css";
 
 const LoginForm = ({ values, onChange }) => {
   const handleChange = (evt) => {
@@ -23,7 +23,7 @@ const LoginForm = ({ values, onChange }) => {
   const passwordId = useId();
 
   return (
-    <form onSubmit={handleSubmit} className={css.options}>
+    <form onSubmit={handleSubmit} className={css.form}>
       <label htmlFor={loginId}>Login</label>
       <input
         type="login"
