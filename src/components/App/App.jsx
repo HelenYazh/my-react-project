@@ -8,6 +8,7 @@ import LoginForm from "../LoginForm/LoginForm";
 import SearchBar from "../SearchBar/SearchBar";
 import LangSwitcher from "../LangSwitcher/LangSwitcher";
 import CoffeeSize from "../CoffeeSize/CoffeeSize";
+import TermsAccepter from "../TermsAccepter/TermsAccepter";
 
 const favouriteBooks = [
   { id: "id-1", name: "JS for beginners" },
@@ -28,6 +29,11 @@ export default function App() {
   });
   const [lang, setLang] = useState("uk");
   const [coffeeSize, setCoffeeSize] = useState("sm");
+  const [hasAccepted, setHasAccepted] = useState(false);
+  const [formValues, setFormValues] = useState({
+    login: "",
+    password: "",
+  });
 
   useEffect(() => {
     console.log("You can see me only once!");
@@ -72,10 +78,6 @@ export default function App() {
 
   const handleClick = () => {
     setClicks(clicks + 1);
-  };
-
-  const handleLogin = (userData) => {
-    console.log(userData);
   };
 
   const Modal = () => {
@@ -145,7 +147,8 @@ export default function App() {
 
       <div>
         <h2>Please login to your account!</h2>
-        <LoginForm onLogin={handleLogin}></LoginForm>
+        <LoginForm values={formValues} onChange={setFormValues}></LoginForm>
+        <TermsAccepter hasAccepted={hasAccepted} onAccept={setHasAccepted} />
       </div>
 
       <div>
