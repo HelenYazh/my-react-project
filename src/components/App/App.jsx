@@ -4,6 +4,10 @@ import { Alert } from "../Alert/Alert";
 import { TfiAgenda } from "react-icons/tfi";
 import { useState, useEffect } from "react";
 import ClickCounter from "../ClickCounter/ClickCounter";
+import LoginForm from "../LoginForm/LoginForm";
+import SearchBar from "../SearchBar/SearchBar";
+import LangSwitcher from "../LangSwitcher/LangSwitcher";
+import CoffeeSize from "../CoffeeSize/CoffeeSize";
 
 const favouriteBooks = [
   { id: "id-1", name: "JS for beginners" },
@@ -22,6 +26,8 @@ export default function App() {
 
     return 0;
   });
+  const [lang, setLang] = useState("uk");
+  const [coffeeSize, setCoffeeSize] = useState("sm");
 
   useEffect(() => {
     console.log("You can see me only once!");
@@ -68,6 +74,10 @@ export default function App() {
     setClicks(clicks + 1);
   };
 
+  const handleLogin = (userData) => {
+    console.log(userData);
+  };
+
   const Modal = () => {
     useEffect(() => {
       const intervalId = setInterval(() => {
@@ -84,51 +94,86 @@ export default function App() {
 
   return (
     <div>
-      <button
-        onClick={() =>
-          alert("Congratulation! Button works well! You're so cool!")
-        }
-      >
-        Click me!
-      </button>
+      <div>
+        <div>
+          <button
+            onClick={() =>
+              alert("Congratulation! Button works well! You're so cool!")
+            }
+          >
+            Click me!
+          </button>
+        </div>
+        <div>
+          <ClickCounter value={clicks} onUpdate={handleClick}></ClickCounter>
+          <ClickCounter value={clicks} onUpdate={handleClick}></ClickCounter>
+        </div>
+        <div>
+          <button onClick={handleToggle}>{isOpen ? "Hide" : "Show"}</button>
+          {isOpen && <Modal />}
+        </div>
+        <div>
+          <p>
+            x: {values.x}, y: {values.y}, z: {values.z}
+          </p>
+          <button onClick={updateX}>Update x</button>
+          <button onClick={updateY}>Update y</button>
+          <button onClick={updateZ}>Update z</button>
+        </div>
+        <div>
+          <button
+            onClick={() => {
+              setClicks(0);
+              setValues({
+                x: 0,
+                y: 0,
+                z: 0,
+              });
+            }}
+          >
+            Reset
+          </button>
+        </div>
+      </div>
 
-      <ClickCounter value={clicks} onUpdate={handleClick}></ClickCounter>
-      <ClickCounter value={clicks} onUpdate={handleClick}></ClickCounter>
+      <SearchBar />
 
-      <button onClick={handleToggle}>{isOpen ? "Hide" : "Show"}</button>
-      {isOpen && <Modal />}
+      <>
+        <p>Selected language: {lang}</p>
+        <LangSwitcher value={lang} onSelect={setLang} />
+      </>
 
-      <p>
-        x: {values.x}, y: {values.y}, z: {values.z}
-      </p>
-      <button onClick={updateX}>Update x</button>
-      <button onClick={updateY}>Update y</button>
-      <button onClick={updateZ}>Update z</button>
+      <div>
+        <h2>Please login to your account!</h2>
+        <LoginForm onLogin={handleLogin}></LoginForm>
+      </div>
 
-      <button
-        onClick={() => {
-          setClicks(0);
-        }}
-      >
-        Reset
-      </button>
+      <div>
+        <h2>Select your coffee size: </h2>
+        <CoffeeSize value={coffeeSize} onSelect={setCoffeeSize} />
+        <p>
+          <b>Selected size:</b> {coffeeSize}
+        </p>
+      </div>
 
-      <h1>Best selling</h1>
-      <Product
-        name="Tacos With Lime"
-        imgUrl="https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?dpr=2&h=480&w=640"
-        price={10.99}
-      />
-      <Product
-        name="Fries and Burger"
-        imgUrl="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?dpr=2&h=480&w=640"
-        price={14.29}
-      />
-      <Product
-        name="Tacos With Lemon"
-        imgUrl="https://media.istockphoto.com/id/1413248571/photo/two-tacos-with-ground-beef-and-lime-on-white-background.jpg?b=1&s=612x612&w=0&k=20&c=bD3wycxcec50b_PKDbuLKxUwYcUDTwy5OGXMsLLr6pg="
-        price={12.49}
-      />
+      <>
+        <h1>Best selling</h1>
+        <Product
+          name="Tacos With Lime"
+          imgUrl="https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?dpr=2&h=480&w=640"
+          price={10.99}
+        />
+        <Product
+          name="Fries and Burger"
+          imgUrl="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?dpr=2&h=480&w=640"
+          price={14.29}
+        />
+        <Product
+          name="Tacos With Lemon"
+          imgUrl="https://media.istockphoto.com/id/1413248571/photo/two-tacos-with-ground-beef-and-lime-on-white-background.jpg?b=1&s=612x612&w=0&k=20&c=bD3wycxcec50b_PKDbuLKxUwYcUDTwy5OGXMsLLr6pg="
+          price={12.49}
+        />
+      </>
       <>
         <TfiAgenda size="48"></TfiAgenda>
         <h2>Books of the week</h2>
