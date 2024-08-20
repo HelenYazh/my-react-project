@@ -10,6 +10,10 @@ import LangSwitcher from "../LangSwitcher/LangSwitcher";
 import CoffeeSize from "../CoffeeSize/CoffeeSize";
 import TermsAccepter from "../TermsAccepter/TermsAccepter";
 import FeedbackForm from "../FeedbackForm/FeedbackForm";
+import ArticleList from "../ArticleList/ArticleList";
+import BulletList from "../BulletList";
+import { fetchArticlesWithTopic } from "../../articles-api";
+import SearchForm from "../SearchForm/SearchForm";
 
 const favouriteBooks = [
   { id: "id-1", name: "JS for beginners" },
@@ -36,9 +40,10 @@ export default function App() {
     password: "",
   });
 
-  useEffect(() => {
-    console.log("You can see me only once!");
-  }, []);
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
   useEffect(() => {
     console.log("Clicks updated: ", clicks);
   }, [clicks]);
@@ -81,6 +86,20 @@ export default function App() {
     setClicks(clicks + 1);
   };
 
+  const handleSearch = async (topic) => {
+    try {
+      setArticles([]);
+      setError(false);
+      setLoading(true);
+      const data = await fetchArticlesWithTopic(topic);
+      setArticles(data);
+    } catch (error) {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const Modal = () => {
     useEffect(() => {
       const intervalId = setInterval(() => {
@@ -97,6 +116,22 @@ export default function App() {
 
   return (
     <div>
+      <div>
+        <h2>Latest articles</h2>
+        <SearchForm onSearch={handleSearch} />
+        {loading && (
+          <>
+            <p>Loading data, please wait...</p>
+            <BulletList />
+          </>
+        )}
+        {error && (
+          <p>
+            ❌Whoops, something went wrong! Please try reloading this page!❌
+          </p>
+        )}
+        {articles.length > 0 && <ArticleList items={articles} />}
+      </div>
       <div>
         <div>
           <button
