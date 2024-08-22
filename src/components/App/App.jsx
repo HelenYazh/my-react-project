@@ -14,6 +14,7 @@ import ArticleList from "../ArticleList/ArticleList";
 import BulletList from "../BulletList";
 import { fetchArticlesWithTopic } from "../../articles-api";
 import SearchForm from "../SearchForm/SearchForm";
+import Player from "../Player/Player";
 
 const favouriteBooks = [
   { id: "id-1", name: "JS for beginners" },
@@ -132,6 +133,11 @@ export default function App() {
         )}
         {articles.length > 0 && <ArticleList items={articles} />}
       </div>
+
+      <div>
+        <Player source="http://media.w3.org/2010/05/sintel/trailer.mp4" />
+      </div>
+
       <div>
         <div>
           <button
